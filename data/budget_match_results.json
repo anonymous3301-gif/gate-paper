@@ -1,0 +1,380 @@
+{
+  "note": "Recovered from budget_match_out.txt after the original run completed all 24 models but crashed on a cp932 UnicodeEncodeError in the final print before writing budget_match_results.json.",
+  "config": {
+    "stages": [
+      "stage0_raw",
+      "stage1_norm",
+      "stage2_fixed",
+      "stage3_kaczmarz"
+    ],
+    "budgets": [
+      1500,
+      3000
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "results": [
+    {
+      "stage": "stage0_raw",
+      "budget": 1500,
+      "seed": 0,
+      "acc": 0.0853,
+      "final_loss": 4.0503,
+      "losses": [
+        [
+          1500,
+          4.0503
+        ]
+      ]
+    },
+    {
+      "stage": "stage0_raw",
+      "budget": 1500,
+      "seed": 1,
+      "acc": 0.0157,
+      "final_loss": 4.1678,
+      "losses": [
+        [
+          1500,
+          4.1678
+        ]
+      ]
+    },
+    {
+      "stage": "stage0_raw",
+      "budget": 1500,
+      "seed": 2,
+      "acc": 0.1722,
+      "final_loss": 2.9038,
+      "losses": [
+        [
+          1500,
+          2.9038
+        ]
+      ]
+    },
+    {
+      "stage": "stage0_raw",
+      "budget": 3000,
+      "seed": 0,
+      "acc": 0.2714,
+      "final_loss": 2.2975,
+      "losses": [
+        [
+          3000,
+          2.2975
+        ]
+      ]
+    },
+    {
+      "stage": "stage0_raw",
+      "budget": 3000,
+      "seed": 1,
+      "acc": 0.2339,
+      "final_loss": 2.3783,
+      "losses": [
+        [
+          3000,
+          2.3783
+        ]
+      ]
+    },
+    {
+      "stage": "stage0_raw",
+      "budget": 3000,
+      "seed": 2,
+      "acc": 0.2638,
+      "final_loss": 2.3096,
+      "losses": [
+        [
+          3000,
+          2.3096
+        ]
+      ]
+    },
+    {
+      "stage": "stage1_norm",
+      "budget": 1500,
+      "seed": 0,
+      "acc": 0.1849,
+      "final_loss": 3.0819,
+      "losses": [
+        [
+          1500,
+          3.0819
+        ]
+      ]
+    },
+    {
+      "stage": "stage1_norm",
+      "budget": 1500,
+      "seed": 1,
+      "acc": 0.1935,
+      "final_loss": 2.9058,
+      "losses": [
+        [
+          1500,
+          2.9058
+        ]
+      ]
+    },
+    {
+      "stage": "stage1_norm",
+      "budget": 1500,
+      "seed": 2,
+      "acc": 0.1972,
+      "final_loss": 2.8917,
+      "losses": [
+        [
+          1500,
+          2.8917
+        ]
+      ]
+    },
+    {
+      "stage": "stage1_norm",
+      "budget": 3000,
+      "seed": 0,
+      "acc": 0.6662,
+      "final_loss": 1.2712,
+      "losses": [
+        [
+          3000,
+          1.2712
+        ]
+      ]
+    },
+    {
+      "stage": "stage1_norm",
+      "budget": 3000,
+      "seed": 1,
+      "acc": 0.7041,
+      "final_loss": 1.1061,
+      "losses": [
+        [
+          3000,
+          1.1061
+        ]
+      ]
+    },
+    {
+      "stage": "stage1_norm",
+      "budget": 3000,
+      "seed": 2,
+      "acc": 0.574,
+      "final_loss": 1.4212,
+      "losses": [
+        [
+          3000,
+          1.4212
+        ]
+      ]
+    },
+    {
+      "stage": "stage2_fixed",
+      "budget": 1500,
+      "seed": 0,
+      "acc": 0.8686,
+      "final_loss": 0.4753,
+      "losses": [
+        [
+          1500,
+          0.4753
+        ]
+      ]
+    },
+    {
+      "stage": "stage2_fixed",
+      "budget": 1500,
+      "seed": 1,
+      "acc": 0.8754,
+      "final_loss": 0.4678,
+      "losses": [
+        [
+          1500,
+          0.4678
+        ]
+      ]
+    },
+    {
+      "stage": "stage2_fixed",
+      "budget": 1500,
+      "seed": 2,
+      "acc": 0.8489,
+      "final_loss": 0.6396,
+      "losses": [
+        [
+          1500,
+          0.6396
+        ]
+      ]
+    },
+    {
+      "stage": "stage2_fixed",
+      "budget": 3000,
+      "seed": 0,
+      "acc": 0.9434,
+      "final_loss": 0.2187,
+      "losses": [
+        [
+          3000,
+          0.2187
+        ]
+      ]
+    },
+    {
+      "stage": "stage2_fixed",
+      "budget": 3000,
+      "seed": 1,
+      "acc": 0.946,
+      "final_loss": 0.1999,
+      "losses": [
+        [
+          3000,
+          0.1999
+        ]
+      ]
+    },
+    {
+      "stage": "stage2_fixed",
+      "budget": 3000,
+      "seed": 2,
+      "acc": 0.9399,
+      "final_loss": 0.1533,
+      "losses": [
+        [
+          3000,
+          0.1533
+        ]
+      ]
+    },
+    {
+      "stage": "stage3_kaczmarz",
+      "budget": 1500,
+      "seed": 0,
+      "acc": 0.9364,
+      "final_loss": 0.2787,
+      "losses": [
+        [
+          1500,
+          0.2787
+        ]
+      ]
+    },
+    {
+      "stage": "stage3_kaczmarz",
+      "budget": 1500,
+      "seed": 1,
+      "acc": 0.9408,
+      "final_loss": 0.1926,
+      "losses": [
+        [
+          1500,
+          0.1926
+        ]
+      ]
+    },
+    {
+      "stage": "stage3_kaczmarz",
+      "budget": 1500,
+      "seed": 2,
+      "acc": 0.9345,
+      "final_loss": 0.4067,
+      "losses": [
+        [
+          1500,
+          0.4067
+        ]
+      ]
+    },
+    {
+      "stage": "stage3_kaczmarz",
+      "budget": 3000,
+      "seed": 0,
+      "acc": 0.9458,
+      "final_loss": 0.1881,
+      "losses": [
+        [
+          3000,
+          0.1881
+        ]
+      ]
+    },
+    {
+      "stage": "stage3_kaczmarz",
+      "budget": 3000,
+      "seed": 1,
+      "acc": 0.9482,
+      "final_loss": 0.1829,
+      "losses": [
+        [
+          3000,
+          0.1829
+        ]
+      ]
+    },
+    {
+      "stage": "stage3_kaczmarz",
+      "budget": 3000,
+      "seed": 2,
+      "acc": 0.9444,
+      "final_loss": 0.1569,
+      "losses": [
+        [
+          3000,
+          0.1569
+        ]
+      ]
+    }
+  ],
+  "summary": {
+    "stage0_raw": {
+      "1500": [
+        0.09106666666666667,
+        0.0784092043916614
+      ],
+      "3000": [
+        0.25636666666666663,
+        0.01982431167363278
+      ],
+      "delta": 0.16529999999999995
+    },
+    "stage1_norm": {
+      "1500": [
+        0.19186666666666666,
+        0.00631057313826036
+      ],
+      "3000": [
+        0.6480999999999999,
+        0.06691195707793937
+      ],
+      "delta": 0.45623333333333327
+    },
+    "stage2_fixed": {
+      "1500": [
+        0.8643000000000001,
+        0.013763357148602948
+      ],
+      "3000": [
+        0.9430999999999999,
+        0.0030610455730027933
+      ],
+      "delta": 0.07879999999999987
+    },
+    "stage3_kaczmarz": {
+      "1500": [
+        0.9372333333333334,
+        0.00323161466349768
+      ],
+      "3000": [
+        0.9461333333333334,
+        0.0019218047073866276
+      ],
+      "delta": 0.008900000000000019
+    }
+  }
+}
