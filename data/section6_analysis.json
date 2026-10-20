@@ -1,0 +1,203 @@
+{
+  "config": {
+    "d_mem": 16,
+    "d_model": 64,
+    "lr": 0.0003,
+    "batch": 32,
+    "V": 64,
+    "n_pairs": 8,
+    "n_dist_eval": 32,
+    "curriculum": "n_dist 8 for the first half of training, then 32",
+    "ci": "seed-paired t interval, n=3, t=4.302653"
+  },
+  "runs": {
+    "one|curriculum=False|steps=1500": {
+      "seeds": [
+        0.1849,
+        0.1935,
+        0.1972
+      ],
+      "mean": 0.19186666666666666,
+      "std_sample": 0.00631057313826036,
+      "std_pop": 0.005152561391083934,
+      "median": 0.1935,
+      "min": 0.1849,
+      "max": 0.1972
+    },
+    "one|curriculum=True|steps=1500": {
+      "seeds": [
+        0.6604,
+        0.2052,
+        0.4284
+      ],
+      "mean": 0.43133333333333335,
+      "std_sample": 0.22761417647706686,
+      "std_pop": 0.18584619686420514,
+      "median": 0.4284,
+      "min": 0.2052,
+      "max": 0.6604
+    },
+    "kaczmarz|curriculum=False|steps=1500": {
+      "seeds": [
+        0.9364,
+        0.9408,
+        0.9345
+      ],
+      "mean": 0.9372333333333334,
+      "std_sample": 0.00323161466349768,
+      "std_pop": 0.0026386023236217595,
+      "median": 0.9364,
+      "min": 0.9345,
+      "max": 0.9408
+    },
+    "kaczmarz|curriculum=True|steps=1500": {
+      "seeds": [
+        0.9324,
+        0.943,
+        0.9383
+      ],
+      "mean": 0.9379,
+      "std_sample": 0.005311308689955774,
+      "std_pop": 0.004336665385600609,
+      "median": 0.9383,
+      "min": 0.9324,
+      "max": 0.943
+    },
+    "raw|curriculum=False|steps=1500": {
+      "seeds": [
+        0.0853,
+        0.0157,
+        0.1722
+      ],
+      "mean": 0.09106666666666667,
+      "std_sample": 0.0784092043916614,
+      "std_pop": 0.06402084729905477,
+      "median": 0.0853,
+      "min": 0.0157,
+      "max": 0.1722
+    },
+    "raw|curriculum=True|steps=1500": {
+      "seeds": [
+        0.234,
+        0.1896,
+        0.2097
+      ],
+      "mean": 0.21109999999999998,
+      "std_sample": 0.022233083456866715,
+      "std_pop": 0.01815323662601246,
+      "median": 0.2097,
+      "min": 0.1896,
+      "max": 0.234
+    },
+    "one|curriculum=False|steps=3000": {
+      "seeds": [
+        0.6662,
+        0.7041,
+        0.574
+      ],
+      "mean": 0.6480999999999999,
+      "std_sample": 0.06691195707793937,
+      "std_pop": 0.054633384177320256,
+      "median": 0.6662,
+      "min": 0.574,
+      "max": 0.7041
+    },
+    "one|curriculum=True|steps=3000": {
+      "seeds": [
+        0.923,
+        0.9275,
+        0.9192
+      ],
+      "mean": 0.9232333333333335,
+      "std_sample": 0.004154916766113759,
+      "std_pop": 0.0033924753335711688,
+      "median": 0.923,
+      "min": 0.9192,
+      "max": 0.9275
+    }
+  },
+  "paired": {
+    "curriculum effect, one (normalized, beta=1), 1500": {
+      "per_seed": [
+        0.4755,
+        0.0117,
+        0.2312
+      ],
+      "mean": 0.23946666666666663,
+      "ci_half": 0.5763459855848002,
+      "ci": [
+        -0.3368793189181336,
+        0.8158126522514668
+      ],
+      "includes_zero": true,
+      "all_same_sign": true
+    },
+    "curriculum effect, raw key, beta=1, 1500": {
+      "per_seed": [
+        0.1487,
+        0.1739,
+        0.0375
+      ],
+      "mean": 0.12003333333333333,
+      "ci_half": 0.18029387090536342,
+      "ci": [
+        -0.06026053757203009,
+        0.30032720423869674
+      ],
+      "includes_zero": true,
+      "all_same_sign": true
+    },
+    "curriculum effect, kaczmarz, 1500": {
+      "per_seed": [
+        -0.004,
+        0.0022,
+        0.0038
+      ],
+      "mean": 0.0006666666666666673,
+      "ci_half": 0.010234325796134537,
+      "ci": [
+        -0.00956765912946787,
+        0.010900992462801205
+      ],
+      "includes_zero": true,
+      "all_same_sign": false
+    },
+    "budget effect (3000-1500), one, no curriculum": {
+      "per_seed": [
+        0.4813,
+        0.5106,
+        0.3768
+      ],
+      "mean": 0.4562333333333333,
+      "ci_half": 0.17471919660935267,
+      "ci": [
+        0.2815141367239806,
+        0.630952529942686
+      ],
+      "includes_zero": false,
+      "all_same_sign": true
+    },
+    "budget effect (3000-1500), one, curriculum": {
+      "per_seed": [
+        0.2626,
+        0.7223,
+        0.4908
+      ],
+      "mean": 0.4919,
+      "ci_half": 0.5709839569946766,
+      "ci": [
+        -0.07908395699467663,
+        1.0628839569946766
+      ],
+      "includes_zero": true,
+      "all_same_sign": true
+    }
+  },
+  "means_only": {
+    "one+curriculum, 3000 (mean of 3 seeds)": 0.9232333333333335,
+    "kaczmarz, 1500 (mean of 3 seeds)": 0.9372333333333334,
+    "kaczmarz, 3000 (budget-matched ladder stage 3)": 0.9461,
+    "fixed beta=0.125, 1500 (ladder stage 2)": 0.8643,
+    "fixed beta=0.125, 3000 (ladder stage 2)": 0.9431
+  }
+}
