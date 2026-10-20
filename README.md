@@ -3,9 +3,9 @@
 **Author:** KPL Research (pseudonym; the final version may use a real name)  
 **Version:** v0.1-draft, 2026-10-20  
 **Status:** **Draft preprint for priority claim. The final version will be updated.**  
-**DOI:** pending `v0.1-draft` release (badge will be added after Zenodo issues the DOI).
+**DOI:** [10.5281/zenodo.23493605](https://doi.org/10.5281/zenodo.23493605)
 
-<!-- DOI badge placeholder: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX) -->
+[![DOI (Zenodo)](https://zenodo.org/badge/DOI/10.5281/zenodo.23493605.svg)](https://doi.org/10.5281/zenodo.23493605)
 
 This repository contains the Markdown manuscript, figures, code, and key result
 files for the paper. It is a draft: the text is readable and the claims are
