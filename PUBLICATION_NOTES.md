@@ -88,4 +88,6 @@ transparency; it is not a legal representation.
 
 ## DOI
 
-Zenodo DOI: pending `v0.1-draft` release.
+Zenodo DOI (v0.1.1-draft): `10.5281/zenodo.23686059`  
+Zenodo DOI (v0.1-draft): `10.5281/zenodo.23493605`  
+Concept DOI (all versions): `10.5281/zenodo.23493604`
