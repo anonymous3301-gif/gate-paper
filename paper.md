@@ -1361,41 +1361,6 @@ Figure: `fig4_matched_mean.py` (PNG/PDF, 300 dpi). Generated 2026-10-19.
 ---
 
 
-
-
-
-## 統合メモ（日本語）
-
-
-
-
-
-- このファイルは `C:\ai_exp` に原稿が存在しなかったため、Section 5.3 の新規ドラフトとして作成。
-
-
-- キャプションは修正版（「same shape as Kaczmarz」「mean rescaled to 0.125」「loss shrinks monotonically」）を反映済み。
-
-
-- 図の符号は実測の $\Delta$ に統一済み。d=16/d=32 の青点は +0.0004/+0.0006、d=32 の赤点は −0.0012。
-
-
-- `gate@0.125` の平均は **0.125（fixed の値）** であり、Kaczmarz モデルの訓練時平均ではない。本文で明記済み。
-
-
-- **d=16 はタウトロジー、d=32 が本当の検証**：$E_{\mathrm{all}}$ は d=16 で 0.125（fixed と同一）、d=24 で 0.145、d=32 で 0.0589。`gate_m` の倍率（fixed/E_all）は 1.00× / 0.86× / 2.12×、`const_m` の倍率（E_all/fixed）は 1.00× / 1.16× / 0.47×。平均独立性は d=32 の ×2.1 で示す。Table 5.3a を追加済み。
-
-
-- 比（6.6× → 12.5× → 43.5×）は分母がゼロに近づくため使わない。絶対低下と相対低下を報告。
-
-
-- d=16/d=32 は3シード、d=24 は10シード。CI の幅が違う理由をキャプションに明記。
-
-
-- GDN decay 10シードと Delta 10シードは確定。Section 7 に本文と Figure 6 を追加済み。
-
-
-
-
 ---
 
 # 6 Curriculum and budget
@@ -1743,15 +1708,6 @@ The per-seed values are the arrays used in Figure 6. The statistical tests were 
 - **Borderline wording for reviewers.** If asked: the 0.4368 seed is 0.0132 below the pre-specified threshold; it is a failure by the rule, not a collapse. The 5/10 count is sensitive to this one seed; the variance result is not.
 
 ---
-
-## 統合メモ（日本語）
-
-- **Figure 6 を生成済み**：`fig6_gdn_multimodality.png` / `.pdf`（300 dpi）。元スクリプトの右上統計ボックスが Delta の10点を隠していたため、統計ボックスを右下、凡例を左上に移動した。平均バー、事前指定閾値 0.45、chance 0.02、GDN の3クラスタ（0.016×3、0.298/0.437、0.519–0.661）が見える。0.45 は Delta 10 seed の前には固定したが GDN v15 は既見であり、fully blind ではない。Figure 7 の閾値スイープで $t\\in[0.44,0.897]$ の全域で $p<0.05$ を確認済み（0.4368 と 0.8975 は $p=0.0867$）。
-- **検定値は SciPy で再現済み**：Brown–Forsythe $F=12.7228$, $p=0.0022036$；Fisher 0.45 は 5/10 vs 0/10, $p=0.0325077$；Fisher 0.02 は 3/10 vs 0/10, $p=0.210526$；Welch $p=1.1988\times10^{-4}$；Mann–Whitney $p=1.8267\times10^{-4}$；中央値差 $0.4185$（0.419 と表記）；分散比 $1324.98$。ユーザー提示の値と一致。**Cohen's $d$ は使わない**：GDN は三峰、Delta は退化分布に近く、$d$ の等分散・同形の前提が成立しない。中央値差・失敗数・分散比で十分。
-- **Section 7 の骨子**：7.1 動機（GDN の decay gate は Kaczmarz gate とは別物、と明記）、7.2 設定と事前指定の provenance（BF は事前登録、Fisher 0.45 は Delta blind / GDN non-blind の部分的事前指定）、7.3 分布（per-seed 表・要約表・0.437 の境界例）、7.4 検定（主端点 BF、副端点 Fisher、0.02 は感度分析、Bonferroni 注意、**threshold sensitivity の Table 7.4 / Figure 7**）、7.5 公開順序は**タスク変種依存**（S-NIAH-1 の 4K/8K では Delta > GDN、S-NIAH-2/3 では GDN > DeltaNet）→ 我々の小規模順序は変種 1 には一致し変種 2/3 には一致しない、転移するのは分布診断、7.6 解釈（co-adaptation 仮説、機構は未確定）、7.7 限界、7.8 結論。
-- **強いが正直な書き方**：主端点は Bonferroni 後も有意（$0.0022<0.025$）。副端点は 0.05 では有意だが Bonferroni 後は落ちる（$0.0325>0.025$）。ただし Holm では両方通る（副 $0.0325<0.05$）。よって「variance が confirmatory、failure rate が supportive」と分けつつ、Bonferroni を保守的限界、Holm を感度分析として併記。0.437 は「failure だが collapse ではない」と明記し、0.43 に動かさない。0.02 の感度分析は非有意のまま。
-- **残 TODO**：Colab の正確な設定（層数、d_model、lr、steps、batch、decay 初期値、`fla` commit）を Appendix D に記入。GDN seed 4 の loss 軌跡確認。`budget_match` の完了待ち。**decay-only ablation（10 seed、log_alpha init 0.5/1.0/2.0、no-decay baseline）**を実行し、Section 7 の「off-the-shelf block comparison」限界を更新する。Section 1 の GDN/Delta 記述は最終10 seed に更新済み（次に反映）。
-- **注意**：GDN は「decay gate」であり、本編の norm-based gate とは別。GDN の結果を「Kaczmarz gate が実アーキテクチャでも必要」と解釈しない。公開 S-NIAH の GDN-DeltaNet 差は変種依存（S-NIAH-1 の 4K/8K では Delta 先行、S-NIAH-2/3 では GDN 先行）で、S-NIAH-1 の差は 8 ポイント。小規模で我々が測る GDN との差は成功モードで 24–38 ポイント、平均で 53 ポイント（collapse 込み）。我々の順序は変種 1 にのみ一致する。proxy validity は主張せず、転移するのは「collapse と lock-in を区別する診断」だけ。
 
 
 ---
@@ -2224,7 +2180,7 @@ We therefore withdraw the open question and narrow the caveat: the three-factor 
 
 **9.2.8 The shape-sensitivity ratio is not reported.** An earlier version summarized the double dissociation as a ratio of the two shape costs across capacities. Because the ratio's growth is driven by one denominator approaching zero, it is misleading; the paper reports the absolute and relative drops instead.
 
-**9.2.9 The earlier revisions (master log, items 1--25).** Items 1--25 are code-level and numerical corrections made before this version. They do not change the paper's conclusions beyond the items already listed in 9.2.1--9.2.8. The full table is in Appendix A (`appendix_master_log_items_1_25.md`); it is kept as a provenance record, not as a section of the main argument.
+**9.2.9 The earlier revisions (master log, items 1--25).** Items 1--25 are code-level and numerical corrections made before this version. They do not change the paper's conclusions beyond the items already listed in 9.2.1--9.2.8. The verbatim table is kept as a provenance record in the working repository and is not reproduced here.
 
 ## 9.3 Complete log
 
@@ -2234,48 +2190,17 @@ The full log -- all 34 items, including the code-level corrections (the shifted 
 
 ---
 
-# Appendix A. Master log items 1-25 (verbatim)
+# Appendix A. Master log items 1-25 (provenance record)
 
-# Items 1--25 (upstream master log) -- pasted
-
-The table below is the upstream master log's items 1--25, pasted verbatim
-(pasted 2026-10-20). It is kept here as the appendix provenance block; nothing in it is paraphrased or reformatted.
-
-Column 3 ("where it appears") is reproduced verbatim from the upstream log, so
-its section numbers refer to the upstream manuscript rather than to this
-version.
+Items 1--25 are code-level and numerical corrections made before this version
+of the paper. They do not change the paper's conclusions beyond the items
+already listed in Section 9.2.1--9.2.8. The verbatim table (upstream master log,
+items 1--25) is kept in the working repository as a provenance record and is
+not reproduced here.
 
 **Note on row 25.** Row 25 is the threshold-provenance correction, which is
-**item 26 in this document** (the upstream log's item 26 was merged into it), so
+item 26 in this document (the upstream log's item 26 was merged into it), so
 that the same correction is not listed twice.
-
-| item | 何を修正したか | 記載箇所 |
-|---|---|---|
-| 1 | RMSNorm が delta を抑制 → norm_3cond で delta も改善 | §5, §9.2.1 |
-| 2 | hebbian > delta → 三重アーティファクト | §4, §9.2.1 |
-| 3 | delta が方向を失う（cos 0.075）→ v_prev バグ | §3, §9.2.1 |
-| 4 | 遷移は d_mem≈24-28 でシャープ → d_mem=24 はタイ | §4, §9.2.1 |
-| 5 | 2610.09056 の理論は直交性で測る → 原典は2次モーメント | §8.3, §9.2.2 |
-| 6 | delta の junk 脆弱性は decay 忘れ → 棄却。Delta > GDN at J=8-32 | §7, §9.2.2 |
-| 7 | 容量がクロスオーバーを決める → 主項は正規化のスケール | §4, §9.2.2 |
-| 8 | κ(G) の爆発が精度破綻を招く → κ=10⁹ でも acc 安定 | §8.3, §9.2.3 |
-| 9 | κ 爆発の主因は V=64 → 支配変数は V/d_mem 比 | §8.3, §9.2.3 |
-| 10 | 内在次元8 → L2 モデル固有。Kaczmarz は 26 まで成長 | §8.3, §9.2.3 |
-| 11 | OSDN は対角前処理の破綻の証拠 → OSDN は成功例 | §1.6, §9.2.2 |
-| 12 | n_pairs 軸は平坦 → 浅い U が残る | §8.3, §9.2.3 |
-| 13 | LMS 安定性が最適βを決める → raw-key regime 限定 | §4, §9.2.4 |
-| 14 | 新アーキは CPU では無理 → モデルではなく設計原理 | §1.5, §9.2.6 |
-| 15 | Kaczmarz の利点は分離の利用 → 共適応の非対称性が本質 | §5, §9.2.5 |
-| 16 | ゲートはテスト時の無料の再重み付け → 訓練時の inductive bias | §5, §9.2.5 |
-| 17 | curriculum が正規化を代替する → raw + curriculum は 0.211 | §6, §9.2.7 |
-| 18 | 平均βが性能を決める → 二重解離で棄却 | §5, §9.2.5 |
-| 19 | raw k の失敗はキーノルム爆発 → E‖k‖² 同一で loss=2.36e18 | §3, §9.2.6 |
-| 20 | 形状感度比で非対称性を測る → fixed の分母がゼロに潰れた副作用 | §5, §9.2.5 |
-| 21 | mean corrected to training value → gate_m の平均は 0.125 に rescaled | §5, §9.2.5 |
-| 22 | GDN の decay が junk 耐性を悪化させる（新規）→ 既報 | §7, §9.2.2 |
-| 23 | Wv bias=True で budget_match 開始 → bias=False で再起動 | §3, §9.2.1 |
-| 24 | raw-k の3相は seed 普遍 → bimodal | §3, §9.2.1 |
-| 25 | 閾値0.45は完全 blind → Delta 10シードには blind、GDN v15 には non-blind | §7, §9.2.4 |
 
 
 ---
@@ -2326,33 +2251,10 @@ version.
 **item 26 in this document** (the upstream log's item 26 was merged into it), so
 that the same correction is not listed twice.
 
-| item | 何を修正したか | 記載箇所 |
-|---|---|---|
-| 1 | RMSNorm が delta を抑制 → norm_3cond で delta も改善 | §5, §9.2.1 |
-| 2 | hebbian > delta → 三重アーティファクト | §4, §9.2.1 |
-| 3 | delta が方向を失う（cos 0.075）→ v_prev バグ | §3, §9.2.1 |
-| 4 | 遷移は d_mem≈24-28 でシャープ → d_mem=24 はタイ | §4, §9.2.1 |
-| 5 | 2610.09056 の理論は直交性で測る → 原典は2次モーメント | §8.3, §9.2.2 |
-| 6 | delta の junk 脆弱性は decay 忘れ → 棄却。Delta > GDN at J=8-32 | §7, §9.2.2 |
-| 7 | 容量がクロスオーバーを決める → 主項は正規化のスケール | §4, §9.2.2 |
-| 8 | κ(G) の爆発が精度破綻を招く → κ=10⁹ でも acc 安定 | §8.3, §9.2.3 |
-| 9 | κ 爆発の主因は V=64 → 支配変数は V/d_mem 比 | §8.3, §9.2.3 |
-| 10 | 内在次元8 → L2 モデル固有。Kaczmarz は 26 まで成長 | §8.3, §9.2.3 |
-| 11 | OSDN は対角前処理の破綻の証拠 → OSDN は成功例 | §1.6, §9.2.2 |
-| 12 | n_pairs 軸は平坦 → 浅い U が残る | §8.3, §9.2.3 |
-| 13 | LMS 安定性が最適βを決める → raw-key regime 限定 | §4, §9.2.4 |
-| 14 | 新アーキは CPU では無理 → モデルではなく設計原理 | §1.5, §9.2.6 |
-| 15 | Kaczmarz の利点は分離の利用 → 共適応の非対称性が本質 | §5, §9.2.5 |
-| 16 | ゲートはテスト時の無料の再重み付け → 訓練時の inductive bias | §5, §9.2.5 |
-| 17 | curriculum が正規化を代替する → raw + curriculum は 0.211 | §6, §9.2.7 |
-| 18 | 平均βが性能を決める → 二重解離で棄却 | §5, §9.2.5 |
-| 19 | raw k の失敗はキーノルム爆発 → E‖k‖² 同一で loss=2.36e18 | §3, §9.2.6 |
-| 20 | 形状感度比で非対称性を測る → fixed の分母がゼロに潰れた副作用 | §5, §9.2.5 |
-| 21 | mean corrected to training value → gate_m の平均は 0.125 に rescaled | §5, §9.2.5 |
-| 22 | GDN の decay が junk 耐性を悪化させる（新規）→ 既報 | §7, §9.2.2 |
-| 23 | Wv bias=True で budget_match 開始 → bias=False で再起動 | §3, §9.2.1 |
-| 24 | raw-k の3相は seed 普遍 → bimodal | §3, §9.2.1 |
-| 25 | 閾値0.45は完全 blind → Delta 10シードには blind、GDN v15 には non-blind | §7, §9.2.4 |
+The upstream master log's items 1--25 are code-level and numerical corrections
+made before this version of the paper. They do not change the paper's conclusions
+beyond the items already listed in Section 9.2.1--9.2.8. The verbatim table is
+kept as a provenance record in the working repository and is not reproduced here.
 
 ---
 
@@ -2366,7 +2268,6 @@ that the same correction is not listed twice.
 
 **Consequence for the paper.** The primary endpoint is described as pre-registered; the secondary Fisher endpoint is described as partially pre-specified and supportive. It does not survive a Bonferroni correction. We do not use Cohen's $d$; we report the median gap (0.419), the failure counts (5/10 vs 0/10), and the variance ratio ($1325\times$).
 
-**日本語メモ.** 「0.45 は結果を見る前に固定した」は撤回。Delta 10 seed は未見だが、GDN 10 seed は v15 で既見。0.45 は GDN の boundary case 0.4368 と lowest success 0.5193 の間にある。閾値スイープで $t\in[0.44,0.897]$ の全域で $p<0.05$ を確認（0.4368 では 4/10, $p=0.0867$、0.44 から 5/10, $p=0.0325$）。上限は 0.8970 で 5 番目に低い Delta seed 0.8961 の直上。provenance 問題を緩和。主端点 BF は threshold-free で confirmatory、副端点 Fisher は supportive。
 
 ## Item 27: the initialization diagnostic of the raw-key write
 
@@ -2376,7 +2277,6 @@ that the same correction is not listed twice.
 
 **Consequence for the paper.** The qualitative claim is unaffected. The violation fraction changes from 99.98% to 99.97%, and the diagnostic now has a reproduction script and a saved artifact. Sections 1, 3, and 4 use the recomputed values.
 
-**日本語メモ.** 初期化診断は保存アーティファクトが存在せず検証不能だった。`init_eig_diag.py` で再計算し 99.97%、10.82 / 9.95 / 35.87 / -34.87。first forward loss と Table 3.2 の全値は一致。定性的主張は不変。
 
 ## Item 28: "erase strength is the largest effect at 3000 steps"
 
@@ -2386,7 +2286,6 @@ that the same correction is not listed twice.
 
 **Consequence for the paper.** Sections 1, 3, 4 and the abstract say "dominant at the baseline budget, persists at 3000" and state explicitly that the 3000-step ranking is not claimed.
 
-**日本語メモ.** 「erase strength は両 budget で最大の効果」は撤回。3000 では stability の点推定（+0.3917）が erase（+0.2950）を上回り CI は重なる。
 
 ## Item 29: scope of the erase-rate claim
 
@@ -2394,7 +2293,6 @@ that the same correction is not listed twice.
 
 **Correction.** The statement can only be about the raw-key regime, and we do not establish it even there, because no raw-key $\beta$ sweep was run. In the normalized regime the optimum ($\beta=0.125$) is comfortably inside $0<\beta<2$, and the raw-key bound does not constrain the normalized model. The raw-key product at the ladder's operating point is reported with the correct scope: 13.2% of write positions at initialization and 20--29% during training at $d_{\mathrm{mem}}=16$ (78--80% at $d_{\mathrm{mem}}=32$), all counterfactuals for a normalized model.
 
-**日本語メモ.** 「最適消去率は安定限界の上」は一般主張として撤回。raw-key regime 限定の文に限定し、raw-key の最適位置は未測定と明記。normalized では最適 0.125 は bound の内側。
 
 ## Item 30: variance reduction is budget-dependent
 
@@ -2402,7 +2300,6 @@ that the same correction is not listed twice.
 
 **Correction.** The reduction holds at 1500 steps (std 0.0784 $\to$ 0.0063) and reverses at 3000 steps (0.0198 $\to$ 0.0669), where the effect is a mean shift ($+0.3917\pm0.1989$, interval excluding zero). At 1500 steps the paired mean difference is $+0.1008\pm0.1898$ and its interval includes zero, so the mean shift is not resolved at that budget either.
 
-**日本語メモ.** 「normalization は分散を減らす」は一般主張として撤回。1500 では分散減少だが mean は未解決、3000 では分散増加で mean shift。予算依存として記述。
 
 ## Item 31: the frozen phase is not a clipping artifact
 
@@ -2410,9 +2307,6 @@ that the same correction is not listed twice.
 
 **Correction.** The clip-protocol control (`clip_ablation.py`; raw key at clip 1.0 / 10.0 / none, and normalized key at no clip; 3 seeds each, 1500 steps) shows the opposite. While the total gradient norm is infinite, any finite clip scales the update to zero, so the frozen phase and the norm-collapse escape are identical at clip 1.0 and clip 10.0 (same escape steps 850/970/230, same key-norm collapse). Without clipping the model never escapes at all: the loss stays above $10^{12}$, the key norms stay at their initialization scale, and all three seeds end at chance. No clipping setting we tested makes the raw-key write learn, so the raw-key failure is not a clipping artifact; the protocol determines how badly the model fails, not whether it fails. What remains protocol-dependent is the magnitude: the normalized stage reaches 0.0754 without clipping instead of 0.1919, so all ladder numbers are stated under clip 1.0, while the ordering holds under every setting tested.
 
-**日本語メモ.** 「frozen phase は clip プロトコルの産物」は撤回。control の結果：勾配が inf の間、どの有限 clip でも update は 0 にスケール → clip 1.0 と 10.0 で freeze と escape が同一。clip なしでは escape せず、loss が 1e12 以上、accuracy は 3 seed とも chance。どの clip でも raw-key write は学習しない → 失敗は clip アーティファクトではない。残る protocol 依存性は大きさ（normalized は no clip で 0.0754）。
-
----
 
 ## Notes on this appendix
 
