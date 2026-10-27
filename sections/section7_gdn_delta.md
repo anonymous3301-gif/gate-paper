@@ -254,12 +254,3 @@ The per-seed values are the arrays used in Figure 6. The statistical tests were 
 - **Borderline wording for reviewers.** If asked: the 0.4368 seed is 0.0132 below the pre-specified threshold; it is a failure by the rule, not a collapse. The 5/10 count is sensitive to this one seed; the variance result is not.
 
 ---
-
-## 統合メモ（日本語）
-
-- **Figure 6 を生成済み**：`fig6_gdn_multimodality.png` / `.pdf`（300 dpi）。元スクリプトの右上統計ボックスが Delta の10点を隠していたため、統計ボックスを右下、凡例を左上に移動した。平均バー、事前指定閾値 0.45、chance 0.02、GDN の3クラスタ（0.016×3、0.298/0.437、0.519–0.661）が見える。0.45 は Delta 10 seed の前には固定したが GDN v15 は既見であり、fully blind ではない。Figure 7 の閾値スイープで $t\\in[0.44,0.897]$ の全域で $p<0.05$ を確認済み（0.4368 と 0.8975 は $p=0.0867$）。
-- **検定値は SciPy で再現済み**：Brown–Forsythe $F=12.7228$, $p=0.0022036$；Fisher 0.45 は 5/10 vs 0/10, $p=0.0325077$；Fisher 0.02 は 3/10 vs 0/10, $p=0.210526$；Welch $p=1.1988\times10^{-4}$；Mann–Whitney $p=1.8267\times10^{-4}$；中央値差 $0.4185$（0.419 と表記）；分散比 $1324.98$。ユーザー提示の値と一致。**Cohen's $d$ は使わない**：GDN は三峰、Delta は退化分布に近く、$d$ の等分散・同形の前提が成立しない。中央値差・失敗数・分散比で十分。
-- **Section 7 の骨子**：7.1 動機（GDN の decay gate は Kaczmarz gate とは別物、と明記）、7.2 設定と事前指定の provenance（BF は事前登録、Fisher 0.45 は Delta blind / GDN non-blind の部分的事前指定）、7.3 分布（per-seed 表・要約表・0.437 の境界例）、7.4 検定（主端点 BF、副端点 Fisher、0.02 は感度分析、Bonferroni 注意、**threshold sensitivity の Table 7.4 / Figure 7**）、7.5 公開順序は**タスク変種依存**（S-NIAH-1 の 4K/8K では Delta > GDN、S-NIAH-2/3 では GDN > DeltaNet）→ 我々の小規模順序は変種 1 には一致し変種 2/3 には一致しない、転移するのは分布診断、7.6 解釈（co-adaptation 仮説、機構は未確定）、7.7 限界、7.8 結論。
-- **強いが正直な書き方**：主端点は Bonferroni 後も有意（$0.0022<0.025$）。副端点は 0.05 では有意だが Bonferroni 後は落ちる（$0.0325>0.025$）。ただし Holm では両方通る（副 $0.0325<0.05$）。よって「variance が confirmatory、failure rate が supportive」と分けつつ、Bonferroni を保守的限界、Holm を感度分析として併記。0.437 は「failure だが collapse ではない」と明記し、0.43 に動かさない。0.02 の感度分析は非有意のまま。
-- **残 TODO**：Colab の正確な設定（層数、d_model、lr、steps、batch、decay 初期値、`fla` commit）を Appendix D に記入。GDN seed 4 の loss 軌跡確認。`budget_match` の完了待ち。**decay-only ablation（10 seed、log_alpha init 0.5/1.0/2.0、no-decay baseline）**を実行し、Section 7 の「off-the-shelf block comparison」限界を更新する。Section 1 の GDN/Delta 記述は最終10 seed に更新済み（次に反映）。
-- **注意**：GDN は「decay gate」であり、本編の norm-based gate とは別。GDN の結果を「Kaczmarz gate が実アーキテクチャでも必要」と解釈しない。公開 S-NIAH の GDN-DeltaNet 差は変種依存（S-NIAH-1 の 4K/8K では Delta 先行、S-NIAH-2/3 では GDN 先行）で、S-NIAH-1 の差は 8 ポイント。小規模で我々が測る GDN との差は成功モードで 24–38 ポイント、平均で 53 ポイント（collapse 込み）。我々の順序は変種 1 にのみ一致する。proxy validity は主張せず、転移するのは「collapse と lock-in を区別する診断」だけ。
