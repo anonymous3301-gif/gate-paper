@@ -63,7 +63,7 @@ We therefore withdraw the open question and narrow the caveat: the three-factor 
 
 **9.2.8 The shape-sensitivity ratio is not reported.** An earlier version summarized the double dissociation as a ratio of the two shape costs across capacities. Because the ratio's growth is driven by one denominator approaching zero, it is misleading; the paper reports the absolute and relative drops instead.
 
-**9.2.9 The earlier revisions (master log, items 1--25).** Items 1--25 are code-level and numerical corrections made before this version. They do not change the paper's conclusions beyond the items already listed in 9.2.1--9.2.8. The full table is in Appendix A (`appendix_master_log_items_1_25.md`); it is kept as a provenance record, not as a section of the main argument.
+**9.2.9 The earlier revisions (master log, items 1--25).** Items 1--25 are code-level and numerical corrections made before this version. They do not change the paper's conclusions beyond the items already listed in 9.2.1--9.2.8. The verbatim table is kept as a provenance record in the working repository and is not reproduced here.
 
 ## 9.3 Complete log
 
