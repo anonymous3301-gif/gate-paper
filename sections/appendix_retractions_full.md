@@ -44,33 +44,10 @@ version.
 **item 26 in this document** (the upstream log's item 26 was merged into it), so
 that the same correction is not listed twice.
 
-| item | 何を修正したか | 記載箇所 |
-|---|---|---|
-| 1 | RMSNorm が delta を抑制 → norm_3cond で delta も改善 | §5, §9.2.1 |
-| 2 | hebbian > delta → 三重アーティファクト | §4, §9.2.1 |
-| 3 | delta が方向を失う（cos 0.075）→ v_prev バグ | §3, §9.2.1 |
-| 4 | 遷移は d_mem≈24-28 でシャープ → d_mem=24 はタイ | §4, §9.2.1 |
-| 5 | 2610.09056 の理論は直交性で測る → 原典は2次モーメント | §8.3, §9.2.2 |
-| 6 | delta の junk 脆弱性は decay 忘れ → 棄却。Delta > GDN at J=8-32 | §7, §9.2.2 |
-| 7 | 容量がクロスオーバーを決める → 主項は正規化のスケール | §4, §9.2.2 |
-| 8 | κ(G) の爆発が精度破綻を招く → κ=10⁹ でも acc 安定 | §8.3, §9.2.3 |
-| 9 | κ 爆発の主因は V=64 → 支配変数は V/d_mem 比 | §8.3, §9.2.3 |
-| 10 | 内在次元8 → L2 モデル固有。Kaczmarz は 26 まで成長 | §8.3, §9.2.3 |
-| 11 | OSDN は対角前処理の破綻の証拠 → OSDN は成功例 | §1.6, §9.2.2 |
-| 12 | n_pairs 軸は平坦 → 浅い U が残る | §8.3, §9.2.3 |
-| 13 | LMS 安定性が最適βを決める → raw-key regime 限定 | §4, §9.2.4 |
-| 14 | 新アーキは CPU では無理 → モデルではなく設計原理 | §1.5, §9.2.6 |
-| 15 | Kaczmarz の利点は分離の利用 → 共適応の非対称性が本質 | §5, §9.2.5 |
-| 16 | ゲートはテスト時の無料の再重み付け → 訓練時の inductive bias | §5, §9.2.5 |
-| 17 | curriculum が正規化を代替する → raw + curriculum は 0.211 | §6, §9.2.7 |
-| 18 | 平均βが性能を決める → 二重解離で棄却 | §5, §9.2.5 |
-| 19 | raw k の失敗はキーノルム爆発 → E‖k‖² 同一で loss=2.36e18 | §3, §9.2.6 |
-| 20 | 形状感度比で非対称性を測る → fixed の分母がゼロに潰れた副作用 | §5, §9.2.5 |
-| 21 | mean corrected to training value → gate_m の平均は 0.125 に rescaled | §5, §9.2.5 |
-| 22 | GDN の decay が junk 耐性を悪化させる（新規）→ 既報 | §7, §9.2.2 |
-| 23 | Wv bias=True で budget_match 開始 → bias=False で再起動 | §3, §9.2.1 |
-| 24 | raw-k の3相は seed 普遍 → bimodal | §3, §9.2.1 |
-| 25 | 閾値0.45は完全 blind → Delta 10シードには blind、GDN v15 には non-blind | §7, §9.2.4 |
+The upstream master log's items 1--25 are code-level and numerical corrections
+made before this version of the paper. They do not change the paper's conclusions
+beyond the items already listed in Section 9.2.1--9.2.8. The verbatim table is
+kept as a provenance record in the working repository and is not reproduced here.
 
 ---
 
@@ -84,7 +61,6 @@ that the same correction is not listed twice.
 
 **Consequence for the paper.** The primary endpoint is described as pre-registered; the secondary Fisher endpoint is described as partially pre-specified and supportive. It does not survive a Bonferroni correction. We do not use Cohen's $d$; we report the median gap (0.419), the failure counts (5/10 vs 0/10), and the variance ratio ($1325\times$).
 
-**日本語メモ.** 「0.45 は結果を見る前に固定した」は撤回。Delta 10 seed は未見だが、GDN 10 seed は v15 で既見。0.45 は GDN の boundary case 0.4368 と lowest success 0.5193 の間にある。閾値スイープで $t\in[0.44,0.897]$ の全域で $p<0.05$ を確認（0.4368 では 4/10, $p=0.0867$、0.44 から 5/10, $p=0.0325$）。上限は 0.8970 で 5 番目に低い Delta seed 0.8961 の直上。provenance 問題を緩和。主端点 BF は threshold-free で confirmatory、副端点 Fisher は supportive。
 
 ## Item 27: the initialization diagnostic of the raw-key write
 
@@ -94,7 +70,6 @@ that the same correction is not listed twice.
 
 **Consequence for the paper.** The qualitative claim is unaffected. The violation fraction changes from 99.98% to 99.97%, and the diagnostic now has a reproduction script and a saved artifact. Sections 1, 3, and 4 use the recomputed values.
 
-**日本語メモ.** 初期化診断は保存アーティファクトが存在せず検証不能だった。`init_eig_diag.py` で再計算し 99.97%、10.82 / 9.95 / 35.87 / -34.87。first forward loss と Table 3.2 の全値は一致。定性的主張は不変。
 
 ## Item 28: "erase strength is the largest effect at 3000 steps"
 
@@ -104,7 +79,6 @@ that the same correction is not listed twice.
 
 **Consequence for the paper.** Sections 1, 3, 4 and the abstract say "dominant at the baseline budget, persists at 3000" and state explicitly that the 3000-step ranking is not claimed.
 
-**日本語メモ.** 「erase strength は両 budget で最大の効果」は撤回。3000 では stability の点推定（+0.3917）が erase（+0.2950）を上回り CI は重なる。
 
 ## Item 29: scope of the erase-rate claim
 
@@ -112,7 +86,6 @@ that the same correction is not listed twice.
 
 **Correction.** The statement can only be about the raw-key regime, and we do not establish it even there, because no raw-key $\beta$ sweep was run. In the normalized regime the optimum ($\beta=0.125$) is comfortably inside $0<\beta<2$, and the raw-key bound does not constrain the normalized model. The raw-key product at the ladder's operating point is reported with the correct scope: 13.2% of write positions at initialization and 20--29% during training at $d_{\mathrm{mem}}=16$ (78--80% at $d_{\mathrm{mem}}=32$), all counterfactuals for a normalized model.
 
-**日本語メモ.** 「最適消去率は安定限界の上」は一般主張として撤回。raw-key regime 限定の文に限定し、raw-key の最適位置は未測定と明記。normalized では最適 0.125 は bound の内側。
 
 ## Item 30: variance reduction is budget-dependent
 
@@ -120,7 +93,6 @@ that the same correction is not listed twice.
 
 **Correction.** The reduction holds at 1500 steps (std 0.0784 $\to$ 0.0063) and reverses at 3000 steps (0.0198 $\to$ 0.0669), where the effect is a mean shift ($+0.3917\pm0.1989$, interval excluding zero). At 1500 steps the paired mean difference is $+0.1008\pm0.1898$ and its interval includes zero, so the mean shift is not resolved at that budget either.
 
-**日本語メモ.** 「normalization は分散を減らす」は一般主張として撤回。1500 では分散減少だが mean は未解決、3000 では分散増加で mean shift。予算依存として記述。
 
 ## Item 31: the frozen phase is not a clipping artifact
 
@@ -128,9 +100,6 @@ that the same correction is not listed twice.
 
 **Correction.** The clip-protocol control (`clip_ablation.py`; raw key at clip 1.0 / 10.0 / none, and normalized key at no clip; 3 seeds each, 1500 steps) shows the opposite. While the total gradient norm is infinite, any finite clip scales the update to zero, so the frozen phase and the norm-collapse escape are identical at clip 1.0 and clip 10.0 (same escape steps 850/970/230, same key-norm collapse). Without clipping the model never escapes at all: the loss stays above $10^{12}$, the key norms stay at their initialization scale, and all three seeds end at chance. No clipping setting we tested makes the raw-key write learn, so the raw-key failure is not a clipping artifact; the protocol determines how badly the model fails, not whether it fails. What remains protocol-dependent is the magnitude: the normalized stage reaches 0.0754 without clipping instead of 0.1919, so all ladder numbers are stated under clip 1.0, while the ordering holds under every setting tested.
 
-**日本語メモ.** 「frozen phase は clip プロトコルの産物」は撤回。control の結果：勾配が inf の間、どの有限 clip でも update は 0 にスケール → clip 1.0 と 10.0 で freeze と escape が同一。clip なしでは escape せず、loss が 1e12 以上、accuracy は 3 seed とも chance。どの clip でも raw-key write は学習しない → 失敗は clip アーティファクトではない。残る protocol 依存性は大きさ（normalized は no clip で 0.0754）。
-
----
 
 ## Notes on this appendix
 
