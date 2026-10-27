@@ -55,6 +55,13 @@ work**, not retractions of prior literature.
 - **Exact scope:** the retractions concern the author's own prior claims and interpretations. They do not name or assert that any prior work is wrong.
 - **9.2.6 specifically:** the numbers, attribution, and scope in the original source were correct. The error was in this manuscript's citation (the table number, Table 3 -> Table 2) and in the implication that a single published ordering exists. It is not a claim that the original paper is wrong.
 
+## Errata (v0.1.1-draft)
+
+- Fixed non-English text accidentally included in v0.1-draft. The scientific content is unchanged.
+- Locations: `paper.md` (internal note after Section 5.3), `appendix_master_log_items_1_25.md` (table headers), `appendix_retractions_full.md` (table headers), `section5_3_matched_mean.md` (internal note), `section7_gdn_delta.md` (Figure 6 note).
+- PDFs were re-scanned (text and metadata) and no non-English text was found; no regeneration was performed.
+- The Errata section is additive; the v0.1-draft release remains unchanged.
+
 ## Known limitations of this draft
 
 - The text is a draft; the final version will be updated.
